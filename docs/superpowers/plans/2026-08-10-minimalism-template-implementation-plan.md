@@ -28,7 +28,7 @@
 ### Task 1: Expo 최신 안정 프로젝트 뼈대 생성
 
 **Files:**
-- Create: `package.json`, `package-lock.json`, `app.json`, `eas.json`, `tsconfig.json`, `.gitignore`, `src/app/_layout.tsx`, `src/app/index.tsx`, `assets/*`, `README.md`
+- Create: `package.json`, `package-lock.json`, `app.json`, `eas.json`, `tsconfig.json`, `.gitignore`, `jest.config.js`, `jest-setup.ts`, `src/app/_layout.tsx`, `src/app/index.tsx`, `assets/*`, `README.md`
 
 **Interfaces:**
 - Produces: Expo Router 프로젝트 진입점, `@/*` 경로 별칭, CNG 기반 앱 설정
@@ -58,6 +58,18 @@ npx expo install --fix
 ```
 
 생성된 SDK가 요구하는 버전으로 Expo 패키지를 맞추고, `android/` 또는 `ios/`가 생성되지 않았는지 확인한다.
+
+테스트를 먼저 실행할 수 있도록 아래 개발 의존성을 설치한다.
+
+```powershell
+npx expo install jest-expo
+npm install --save-dev @testing-library/react-native
+npm install --save-dev @types/jest
+```
+
+`jest.config.js`는 `jest-expo` preset과 `jest-setup.ts`를 사용하고, `jest-setup.ts`에는 RNTL 패키지 루트(`@testing-library/react-native`)를 import한다. 설치된 RNTL 14는 패키지 import 시 내장 Jest matcher를 자동 등록한다.
+
+`tsconfig.json`의 `compilerOptions.types`에는 `jest`를 추가해 테스트 파일도 `tsc --noEmit` 대상에 포함한다.
 
 - [ ] **Step 4: 앱 식별자 설정**
 
@@ -103,7 +115,7 @@ npx expo install --fix
 
 ```powershell
 npx expo-doctor
-git add package.json package-lock.json app.json eas.json tsconfig.json .gitignore src/app assets README.md
+git add package.json package-lock.json app.json eas.json tsconfig.json .gitignore jest.config.js jest-setup.ts src/app assets README.md
 git commit -m "✨ Expo 공통 템플릿 뼈대 생성"
 ```
 
@@ -397,36 +409,20 @@ git commit -m "✨ 디자인 시스템 쇼케이스 화면 추가"
 ### Task 7: 테스트·스크립트·템플릿 문서 정리
 
 **Files:**
-- Create: `jest.config.js`, `jest-setup.ts`, `src/test/test-provider.tsx`
+- Create: `src/test/test-provider.tsx`
 - Modify: `package.json`, `README.md`, `eas.json`
 
 **Interfaces:**
 - `test-provider.tsx` exports a `renderWithTheme` helper that wraps React Native Testing Library renders with `PaperProvider` and `paperTheme`.
 - `package.json` scripts: `test`, `typecheck`, `lint`.
 
-- [ ] **Step 1: Jest 설정과 테스트 provider 작성**
-
-```js
-module.exports = {
-  preset: "jest-expo",
-  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
-  testPathIgnorePatterns: ["/node_modules/", "/.expo/"]
-};
-```
-
-`jest-setup.ts`에는 React Native Testing Library의 내장 matcher를 등록한다.
-
-```ts
-import "@testing-library/react-native/extend-expect";
-```
+- [ ] **Step 1: 테스트 provider 작성**
 
 `renderWithTheme`는 `@testing-library/react-native`의 `render`를 감싸고 테스트 컴포넌트에 `paperTheme`를 제공한다.
 
 - [ ] **Step 2: 테스트 도구 설치 및 전체 테스트 실행**
 
 ```powershell
-npx expo install jest-expo
-npm install --save-dev @testing-library/react-native
 npm test -- --runInBand
 ```
 
@@ -450,7 +446,7 @@ README에는 템플릿 복제 후 `name`, `slug`, Android package, EAS project �
 - [ ] **Step 4: 커밋**
 
 ```powershell
-git add jest.config.js jest-setup.ts src/test package.json README.md eas.json
+git add src/test package.json README.md eas.json
 git commit -m "🧪 템플릿 테스트와 사용 문서 추가"
 ```
 
