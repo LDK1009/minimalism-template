@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import { TemplateShowcaseScreen } from "@/screens/template-showcase";
 
 export default function IndexScreen() {
-  return (
-    <View>
-      <Text>Minimalism Template</Text>
-    </View>
-  );
+  return <TemplateShowcaseScreen />;
 }
