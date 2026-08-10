@@ -28,8 +28,7 @@
 ### Task 1: Expo 최신 안정 프로젝트 뼈대 생성
 
 **Files:**
-- Create: `package.json`, `app.json`, `eas.json`, `tsconfig.json`, `.gitignore`, `src/app/_layout.tsx`, `src/app/index.tsx`, `assets/*`
-- Modify: `README.md`
+- Create: `package.json`, `package-lock.json`, `app.json`, `eas.json`, `tsconfig.json`, `.gitignore`, `src/app/_layout.tsx`, `src/app/index.tsx`, `assets/*`, `README.md`
 
 **Interfaces:**
 - Produces: Expo Router 프로젝트 진입점, `@/*` 경로 별칭, CNG 기반 앱 설정
@@ -104,7 +103,7 @@ npx expo install --fix
 
 ```powershell
 npx expo-doctor
-git add package.json app.json eas.json tsconfig.json .gitignore src/app assets README.md
+git add package.json package-lock.json app.json eas.json tsconfig.json .gitignore src/app assets README.md
 git commit -m "✨ Expo 공통 템플릿 뼈대 생성"
 ```
 
