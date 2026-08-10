@@ -205,15 +205,15 @@ git commit -m "🎨 흑백 디자인 토큰과 테마 추가"
 - [ ] **Step 1: 버튼 동작 테스트 작성**
 
 ```tsx
-test("PrimaryButton은 누르면 onPress를 호출한다", () => {
+test("PrimaryButton은 누르면 onPress를 호출한다", async () => {
   const onPress = jest.fn();
-  render(
+  const rendered = await render(
     <PaperProvider theme={paperTheme}>
       <PrimaryButton label="확인" onPress={onPress} />
     </PaperProvider>,
   );
 
-  fireEvent.press(screen.getByRole("button", { name: "확인" }));
+  fireEvent.press(rendered.getByRole("button", { name: "확인" }));
   expect(onPress).toHaveBeenCalledTimes(1);
 });
 ```
