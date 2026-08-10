@@ -409,7 +409,7 @@ git commit -m "✨ 디자인 시스템 쇼케이스 화면 추가"
 ### Task 7: 테스트·스크립트·템플릿 문서 정리
 
 **Files:**
-- Create: `src/test/test-provider.tsx`
+- Create: `eslint.config.js`, `src/test/test-provider.tsx`
 - Modify: `package.json`, `README.md`, `eas.json`
 
 **Interfaces:**
@@ -446,7 +446,7 @@ README에는 템플릿 복제 후 `name`, `slug`, Android package, EAS project �
 - [ ] **Step 4: 커밋**
 
 ```powershell
-git add src/test package.json README.md eas.json
+git add eslint.config.js src/test package.json package-lock.json README.md eas.json
 git commit -m "🧪 템플릿 테스트와 사용 문서 추가"
 ```
 

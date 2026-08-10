@@ -10,6 +10,15 @@ Expo 기반 미니멀 앱 공통 템플릿입니다.
 - 앱별 네이티브 모듈 설치
 - 서버·Supabase·외부 DB 미사용
 
+## 개발 명령
+
+```powershell
+npm run start
+npm test -- --runInBand
+npm run typecheck
+npm run lint
+```
+
 ## 로컬 저장소
 
 템플릿은 특정 저장소 패키지를 기본 설치하지 않습니다. 앱별 데이터 모델과 용량 요구사항에 맞는 구현을 `StorageAdapter`에 연결합니다.
@@ -39,3 +48,13 @@ npx expo install expo-camera
 2. `app.json`의 `name`, `slug`, Android package를 변경합니다.
 3. 앱 기능에 필요한 네이티브 모듈과 로컬 저장소 구현만 추가합니다.
 4. 기능 검증 후 앱별 GitHub 저장소에 저장합니다.
+
+## EAS 배포 준비
+
+앱별 `app.json` 식별자와 EAS 프로젝트 연결을 완료한 뒤 아래 프로필을 사용합니다.
+
+```powershell
+eas build --profile preview
+eas build --profile production
+eas submit --profile production
+```
